@@ -1,0 +1,22 @@
+[type="file"] {
+    height: 0;
+    overflow: hidden;
+    width: 0;
+  }
+
+  .example-card {
+    max-width: 400px;
+    /* min-width: 300px; */
+  }
+
+  .btn-center{
+      text-align: center;
+  }
+
+  .center-padre {
+    background:#fefefc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+

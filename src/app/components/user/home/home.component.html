@@ -1,0 +1,59 @@
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+
+
+  </head>
+
+  <body>
+
+        <aside class="mdc-drawer mdc-drawer--dismissible">
+          <div class="mdc-drawer__content">
+            <nav class="mdc-list">
+              <a class="mdc-list-item mdc-list-item--activated" [routerLink]="['/home']" aria-current="page">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">inbox</i>
+                <span class="mdc-list-item__text">Inicio</span>
+              </a>
+
+              <a class="mdc-list-item" href="#">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">drafts</i>
+                <span class="mdc-list-item__text">Perfil</span>
+              </a>
+
+              <a class="mdc-list-item" [routerLink]="['/home/perfil-modelo']" >
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">drafts</i>
+                <span class="mdc-list-item__text">Perfil Modelo</span>
+              </a>
+
+              <a class="mdc-list-item"   (click)="logout()">
+
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">exit_to_app</i>
+                <span class="mdc-list-item__text">Salir</span>
+              </a>
+            </nav>
+          </div>
+        </aside>
+
+
+
+    <div class="mdc-drawer-app-content">
+      <header class="mdc-top-app-bar app-bar" id="app-bar">
+        <div class="mdc-top-app-bar__row">
+          <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+            <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>
+            <span class="mdc-top-app-bar__title" [routerLink]="['/home']" >Click</span>
+          </section>
+        </div>
+      </header>
+
+      <main class="main-content" id="main-content">
+          <div class="mdc-top-app-bar--fixed-adjust">
+            <router-outlet></router-outlet>
+
+        </div>
+      </main>
+    </div>
+</body>
+
+
