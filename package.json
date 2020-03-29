@@ -23,7 +23,6 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
-    "@coachcare/datepicker": "^1.0.2",
     "alertifyjs": "^1.13.1",
     "angular2-moment": "^1.9.0",
     "express": "^4.17.1",
