@@ -1,8 +1,9 @@
+// import {MDCList} from "@material/list";
+// import {MDCDrawer} from "@material/drawer";
+// import {MDCTopAppBar} from "@material/top-app-bar";
+
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import {MDCList} from "@material/list";
-import {MDCDrawer} from "@material/drawer";
 import {Router, ActivatedRoute } from '@angular/router';
-import {MDCTopAppBar} from "@material/top-app-bar";
 
 @Component({
   selector: 'app-home',
@@ -19,17 +20,16 @@ export class HomeComponent implements OnInit {
      }
 
     ngOnInit() {
-    // const list = MDCList.attachTo(document.querySelector('.mdc-list'));
 
-    const drawer = MDCDrawer.attachTo(document.querySelector('.mdc-drawer'));
+    // const drawer = MDCDrawer.attachTo(document.querySelector('.mdc-drawer'));
 
-        const topAppBar = MDCTopAppBar.attachTo(document.getElementById('app-bar'));
-        topAppBar.setScrollTarget(document.getElementById('main-content'));
-        topAppBar.listen('MDCTopAppBar:nav', () => {
-        drawer.open = !drawer.open;
-        });
+    //     const topAppBar = MDCTopAppBar.attachTo(document.getElementById('app-bar'));
+    //     topAppBar.setScrollTarget(document.getElementById('main-content'));
+    //     topAppBar.listen('MDCTopAppBar:nav', () => {
+    //     drawer.open = !drawer.open;
+    //     });
 
-    }
+     }
 
     logout(){
 		localStorage.clear();

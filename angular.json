@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "FrontMatch"
+  "defaultProject": "FrontMatch",
+  "cli": {
+    "analytics": false
+  }
 }
