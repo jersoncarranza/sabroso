@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../../services/user/user.service';
-import {Tile} from '../../../models/Tile';
+// import {Tile} from '../../../models/Tile';
 
 @Component({
   selector: 'app-profile-modelo',
@@ -22,13 +22,13 @@ export class ProfileModeloComponent  implements OnInit {
     ngOnInit() {
 
     }
-    public tiles: Tile[] = [
-        {text: 'One',    cols: 3, rows: 1, color: 'lightblue' },
-        {text: 'Two',    cols: 1, rows: 2, color: 'lightgreen'},
-        {text: 'Three',  cols: 1, rows: 1, color: 'lightpink' },
-        {text: 'Four',   cols: 2, rows: 1, color: '#DDBDF1'   },
-    ];
-    
+    // public tiles: Tile[] = [
+    //     {text: 'One',    cols: 3, rows: 1, color: 'lightblue' },
+    //     {text: 'Two',    cols: 1, rows: 2, color: 'lightgreen'},
+    //     {text: 'Three',  cols: 1, rows: 1, color: 'lightpink' },
+    //     {text: 'Four',   cols: 2, rows: 1, color: '#DDBDF1'   },
+    // ];
+
 
 }
 

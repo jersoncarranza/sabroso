@@ -8,6 +8,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material';
+import { MatInputModule} from '@angular/material/input';
+import {MatSliderModule} from '@angular/material/slider';
+
+
 import { LoginComponent } from './components/user/login/login/login.component';
 //import { HeaderComponent } from './components/user/header/header/header.component';
 import  './services/calendar/moment.es';
@@ -33,7 +37,9 @@ import {HomeModule } from './home/home.module';
         ReactiveFormsModule,
         MaterialModule,
         MomentModule,
-        HomeModule
+        HomeModule,
+        MatInputModule,
+        MatSliderModule
   ],
 
   providers: [

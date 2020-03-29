@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl,Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { User} from '../../../../models/user';
-import{Router, ActivatedRoute, Params} from '@angular/router';
-import {UserService} from  '../../../../services/user/user.service';
+import { Router, ActivatedRoute, Params} from '@angular/router';
+import { UserService} from  '../../../../services/user/user.service';
 import * as alertify from 'alertifyjs';
-import {MustMatch} from '../../../../services/validator/validator.service';
-import * as moment from 'moment';
+import * as moment   from 'moment';
 import '../../../../services/calendar/moment.es';
-;
+
 
 @Component({
   selector: 'app-login',
