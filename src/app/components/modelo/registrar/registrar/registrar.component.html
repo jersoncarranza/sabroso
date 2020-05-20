@@ -37,10 +37,10 @@
             </mat-form-field>
             <br>
             <mat-form-field>
-                <input matInput placeholder="Contraseña " [type]="hide ? 'password' : 'text'" name="contrasena" formControlName="contrasena" >
-                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                </button>
+                <input matInput placeholder="Contraseña " name="contrasena" formControlName="contrasena" >
+                <!-- <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"> -->
+                <!-- <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->
+                <!-- </button> -->
             </mat-form-field>
             <br>
             <mat-form-field class="example-full-width">
@@ -114,3 +114,5 @@
     </div>
 </mat-card>
 </div>
+
+

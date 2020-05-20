@@ -47,7 +47,7 @@ export class RegistrarComponent implements OnInit {
     uploadedFilePath: string = null;
     public urlFile: string;
     /***Token**/
-    public t  /** **/
+    public    /** **/
     constructor(
         private _userService: UserService,
         private _geoService: GeoService,
@@ -63,7 +63,7 @@ export class RegistrarComponent implements OnInit {
             country:    new FormControl(),
             city:       new FormControl()
         });
-        this.userRegisterModelo = new User("","","","","","","","","","",1,true, -1,8,-1,-1,0,0,"","","","","","");
+        this.userRegisterModelo = new User("","","","","","","","","","",1,true, -1,8,-1,-1,0,0,"","","","","","","","");
         moment.locale('es');
         this.urlFile = GLOBAL.url;
 
@@ -112,8 +112,6 @@ export class RegistrarComponent implements OnInit {
                             //Subida de imagen de usuario
                             this._uploadService.makeFileRequestModeloRegister(this.urlFile + 'user/upload-user-cloudinary/'+ this.user._id, [], this.filesToUpload, 'image')
                             .then((result:any)=>{
-
-                                console.log('XD XD  ');
                                 this.user.image = result.user.image;
                              //   localStorage.setItem('identity', JSON.stringify(this.user))
                             });
@@ -135,12 +133,10 @@ export class RegistrarComponent implements OnInit {
 		switch (code) {
 			case 0: alertify.alert('Error', 'Error intentalo mas tarde');break;
 			case 1:
-                this._router.navigate(['/home']);
-                alertify.success('Correcto', 'Registro correctamente'); break;
+                    this._router.navigate(['/home']);
+                    alertify.success('Correcto', 'Registro correctamente'); break;
             case 2: alertify.alert('Advertencia', 'La clave esta mal'); break;//login
-
             case 4: alertify.alert('Error', 'No se ha podido actualizar el estado del pago'); break;
-
 			case 7: alertify.alert('Advertencia', 'No se que hacer'); break;
 			case 8: alertify.alert('Advertencia', 'Este correo no existe'); break;//login
 			case 9: alertify.alert('Error', 'Este correo ya esta registrado'); break;

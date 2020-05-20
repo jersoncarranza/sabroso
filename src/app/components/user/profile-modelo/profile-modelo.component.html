@@ -1,4 +1,122 @@
-<p>test</p>
-<br>
-<p>listo</p>
+<h3>Datos</h3>
+<mat-tab-group>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>person_outline</mat-icon>
+        Datos
+        </ng-template>
+        <div class="example-small-box mat-elevation-z4">
+            <form    [formGroup]="Form" class="example-form" (ngSubmit)="onDatosUsuario()" >
 
+                <!-- image profile -->
+                <mat-list-item>
+                    <label for="image"  class="btn btn-outline-light">
+                    <div  #imageprofile name="imageprofile" for="image"  class="image-user">
+                        <img  height="70"  src="{{urlImage + user.image}}" *ngIf="user.image">
+                        <img width="70px" height="70px" src="assets/user.jpg" *ngIf="!user.image"  >
+                    </div>
+
+                </label>
+                    <input id="image" type="file" name="image" (change)="fileChangeEvent($event)" />
+
+                </mat-list-item>
+                <mat-list-item>
+                    <label for="image">
+                        <div *ngIf="fileUploadProgress">
+                        Upload progress: {{ fileUploadProgress }}
+                        </div>
+                        <div   class="image-preview mb-3 btn-center" *ngIf="previewUrl">
+                            <img [src]="previewUrl" height="70" />
+                        </div>
+
+                        <div  *ngIf="uploadedFilePath">
+                            {{uploadedFilePath}}
+                        </div>
+                    </label>
+                </mat-list-item>
+                <!-- image profile -->
+
+                <mat-form-field class="example-full-width">
+                  <mat-label>Nombres</mat-label>
+                  <input matInput name="nombre_" formControlName="nombre_form"  #nombreform maxlength="18"               >
+                  <mat-hint align="end">{{nombreform.value.length}} / 18</mat-hint>
+                </mat-form-field>
+
+                <p>
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Dime una descripción como eres</mat-label>
+                    <textarea matInput #descripciontext  maxlength="100"
+                    name="descripcion" formControlName="descripcion_form"
+                    placeholder="Buen día y que te sientas con alegría "></textarea>
+                    <mat-hint align="end">{{descripciontext.value.length}} / 100</mat-hint>
+                  </mat-form-field>
+                </p>
+
+
+                <table class="example-full-width" cellspacing="0">
+                    <tr>
+                        <td class="center-td">
+                            <button mat-flat-button color="primary" aria-label="Example icon-button with a heart icon">
+                                Guardar
+                                <mat-icon>save</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+
+                </table>
+              </form>
+        </div>
+
+        <!-- redes Sociales -->
+
+         <div class="example-small-box mat-elevation-z4">
+           <table style="width: inherit;">
+               <tr>
+                    <td>
+                        <mat-form-field class="example-full-width">
+                        <mat-label>Link Red Social</mat-label>
+                            <input matInput name="RedSocial"  #redsocial maxlength="50"               >
+                            <mat-hint align="end">{{redsocial.value.length}} / 50</mat-hint>
+                        </mat-form-field>
+                    </td>
+                    <td class="center-td">
+                        <button mat-flat-button color="primary" (click)="onRedSocial()" aria-label="Example icon-button with a heart icon">
+                            <mat-icon>save</mat-icon>
+                        </button>
+                    </td>
+               </tr>
+               <tr>
+                   <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Whatsapp</mat-label>
+                        <input type="text" (keypress)="numberOnly($event)"  matInput name="whatsapp"  pattern="[0-9]*" #whatsapp maxlength="12"               >
+                        <mat-hint align="end">{{whatsapp.value.length}} / 12</mat-hint>
+                      </mat-form-field>
+                   </td>
+                   <td class="center-td">
+                    <button mat-flat-button color="primary" (click)="onWhatsapp()" aria-label="Example icon-button with a heart icon">
+                        <mat-icon>save</mat-icon>
+                    </button>
+                    </td>
+               </tr>
+           </table>
+
+
+
+
+        </div>
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>settings</mat-icon>
+            Configuración
+        </ng-template>
+        <div class="example-large-box mat-elevation-z4">
+         Bienvenido
+
+        </div>
+    </mat-tab>
+
+
+  </mat-tab-group>

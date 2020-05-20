@@ -23,6 +23,8 @@ export class User{
     public twitter:       String,
     public created:     String,
     public country:     String,
-    public city:        String
+    public city:        String,
+    public redSocial:   String,
+    public whatsapp:    String
     ) {}
 }

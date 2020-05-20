@@ -5,7 +5,7 @@ import {LoginComponent} from './components/user/login/login/login.component'
 import { RegistrarComponent } from './components/modelo/registrar/registrar/registrar.component';
 
 //import{HomeComponent} from './components/user/home/home.component';
-//import {UserGuard} from './services/guard/user.guard';
+import {UserGuard} from './services/guard/user.guard';
 //import { ProfileModeloComponent } from './components/user/profile-modelo/profile-modelo.component';
 //import { AppComponent } from './app.component';
 

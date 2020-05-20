@@ -14,6 +14,7 @@ import '../../../../services/calendar/moment.es';
   styleUrls: ['./login.component.css'],
   providers:[UserService]
 })
+
 export class LoginComponent implements OnInit {
     fechaActual = new Date();
     aio = this.fechaActual.getFullYear();
@@ -60,7 +61,7 @@ export class LoginComponent implements OnInit {
 
         });
 
-        this.user = new User("","","","","","","","","","",1,true, -1,7,-1,-1,0,0,"","","","","","");
+        this.user = new User("","","","","","","","","","",1,true, -1,7,-1,-1,0,0,"","","","","","","","");
         moment.locale('es');
 
     }
@@ -109,13 +110,11 @@ export class LoginComponent implements OnInit {
         if(this.Form.value.nombre      != ''   &&
 			this.Form.value.email	   != ''   &&
             this.Form.value.contrasena != ''   &&
-            this.Form.value.calendar   != null   &&
             this.Form.value.sexo   == 1 ||  this.Form.value.sexo   == 0){
 
             this.user.nombres   =  this.Form.value.nombre.trim();
 			this.user.email     =  this.Form.value.email.trim();
             this.user.password  =  this.Form.value.contrasena.trim();
-            this.user.fechaNacimiento =  this.Form.value.calendar;
             this.user.sexo     = this.Form.value.sexo;
 
 			this._userService.register(this.user).subscribe(

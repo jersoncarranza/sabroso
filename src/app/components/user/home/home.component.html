@@ -4,55 +4,63 @@
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 
 
-  </head>
+</head>
 
-  <body>
+<body>
+    <section id="header">
+        <div class="mdc-drawer-app-content">
+            <header class="mdc-top-app-bar app-bar" id="app-bar">
+                <div class="mdc-top-app-bar__row">
+                    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                        <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button"  >menu</button>
+                        <span class="mdc-top-app-bar__title" [routerLink]="['/home']" (click)="test()" >Click</span>
+                    </section>
+                </div>
+            </header>
 
-        <aside class="mdc-drawer mdc-drawer--dismissible">
+        </div>
+    </section>
+
+    <section>
+
+        <aside  id="drawerid" class="mdc-drawer mdc-drawer--modal">
           <div class="mdc-drawer__content">
-            <nav class="mdc-list">
-              <a class="mdc-list-item mdc-list-item--activated" [routerLink]="['/home']" aria-current="page">
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">inbox</i>
-                <span class="mdc-list-item__text">Inicio</span>
+            <nav class="mdc-list" (click)="list()" >
+               <a  *ngIf="user.tipo == 7" id="item1" class="mdc-list-item mdc-list-item--activated" [routerLink]="['/home/principal']" aria-current="page" tabindex="0">
+                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">home</i>
+                    <span class="mdc-list-item__text"  >Inicio </span>
+              </a>
+              <a *ngIf="user.tipo == 8" class="mdc-list-item" [routerLink]="['/home/perfil-modelo']" aria-current="page" tabindex="0">
+                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true"> account_circle</i>
+                    <span class="mdc-list-item__text">Perfil Modelo</span>
               </a>
 
-              <a class="mdc-list-item" href="#">
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">drafts</i>
-                <span class="mdc-list-item__text">Perfil</span>
+              <!--
+              <a  class="mdc-list-item" href="#" *ngIf="user.tipo == 7" >
+                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">   person</i>
+                    <span class="mdc-list-item__text">Perfil</span>
               </a>
+            -->
 
-              <a class="mdc-list-item" [routerLink]="['/home/perfil-modelo']" >
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">drafts</i>
-                <span class="mdc-list-item__text">Perfil Modelo</span>
-              </a>
 
-              <a class="mdc-list-item"   (click)="logout()">
-
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">exit_to_app</i>
-                <span class="mdc-list-item__text">Salir</span>
-              </a>
+                <a class="mdc-list-item"   (click)="logout()">
+                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">exit_to_app</i>
+                    <span class="mdc-list-item__text">Salir </span>
+                </a>
             </nav>
           </div>
         </aside>
 
 
-
-    <div class="mdc-drawer-app-content">
-      <header class="mdc-top-app-bar app-bar" id="app-bar">
-        <div class="mdc-top-app-bar__row">
-          <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-            <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>
-            <span class="mdc-top-app-bar__title" [routerLink]="['/home']" >Click</span>
-          </section>
+        <div id="scrollbar" class="mdc-drawer-scrim">
         </div>
-      </header>
+    </section>
 
-      <main class="main-content" id="main-content">
-          <div class="mdc-top-app-bar--fixed-adjust">
-            <router-outlet></router-outlet>
-        </div>
-      </main>
+
+    <div class="mdc-top-app-bar--fixed-adjust">
+        <router-outlet></router-outlet>
     </div>
+
 </body>
 
 

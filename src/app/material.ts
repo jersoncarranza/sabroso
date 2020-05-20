@@ -14,11 +14,11 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatListModule} from '@angular/material/list';
-import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatGridListModule} from '@angular/material/grid-list';
-
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatPaginatorModule} from '@angular/material/paginator';
 @NgModule({
 
     imports:[MatButtonModule,MatCardModule,
@@ -28,7 +28,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
         MatTabsModule,MatRadioModule,
         MatListModule,MatDatepickerModule,
         MatMomentDateModule, MatExpansionModule,
-        MatStepperModule, MatGridListModule],
+        MatStepperModule, MatGridListModule,MatSnackBarModule,
+        MatPaginatorModule],
 
     exports:[MatButtonModule, MatCardModule,
         MatToolbarModule,MatInputModule,
@@ -37,7 +38,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
         MatTabsModule,MatRadioModule,
         MatListModule,MatDatepickerModule,
         MatMomentDateModule, MatExpansionModule,
-        MatStepperModule, MatGridListModule
+        MatStepperModule, MatGridListModule,MatSnackBarModule
     ]
 })
 

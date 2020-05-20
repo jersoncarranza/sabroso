@@ -2,14 +2,13 @@ import { NgModule , LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { routing, appRoutingProviders} from './app.routing';
 import { FormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import { MomentModule} from 'angular2-moment';
-import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material';
-import { MatInputModule} from '@angular/material/input';
-import {MatSliderModule} from '@angular/material/slider';
+
 
 
 import { LoginComponent } from './components/user/login/login/login.component';
@@ -20,11 +19,17 @@ import  './services/calendar/moment.es';
 import {UserGuard} from './services/guard/user.guard';
 import { RegistrarComponent } from './components/modelo/registrar/registrar/registrar.component';
 import {HomeModule } from './home/home.module';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MainComponent } from './components/user/main/main/main.component';
+import { MainHijoComponent } from './components/user/main-hijo/main-hijo/main-hijo.component';
 @NgModule({
   declarations: [
     AppComponent,
      LoginComponent,
      RegistrarComponent,
+     MainComponent,
+     MainHijoComponent,
      //HeaderComponent,
     // HomeComponent,
   ],
@@ -38,14 +43,17 @@ import {HomeModule } from './home/home.module';
         MaterialModule,
         MomentModule,
         HomeModule,
-        MatInputModule,
-        MatSliderModule
+        MatNativeDateModule,
+        MatDatepickerModule
   ],
 
   providers: [
+
       appRoutingProviders,
       UserGuard,
       { provide: LOCALE_ID, useValue: 'es' },
+      MatNativeDateModule,
+      MatDatepickerModule,
      // { provide: MatDatepickerIntl, useClass: DatepickerEsp }
     ],
   bootstrap: [AppComponent]
