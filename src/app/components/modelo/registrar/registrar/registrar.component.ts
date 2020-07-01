@@ -104,7 +104,7 @@ export class RegistrarComponent implements OnInit {
             this.userRegisterModelo.city    = this.Form.value.city;
             this.loading = true;
 
-    
+
             this.DivCard.nativeElement.style.display  = 'none',
 
       		this._userService.registerModelo(this.userRegisterModelo).subscribe(

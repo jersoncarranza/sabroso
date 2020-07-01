@@ -7,8 +7,8 @@ var PORT        =  process.env.PORT || 8000;
 app.use(express.static(__dirname + '/dist/FrontMatch'));
 
 app.get('/*', function(req,res){
-  //  res.sendFile(path.join(__dirname + '/dist/FrontMatch/index.html'));
-    res.sendFile('index.html', {root: 'dist/FrontMatch/'});
+    res.sendFile(path.join(__dirname + '/dist/FrontMatch/index.html'));
+  //  res.sendFile('index.html', {root: 'dist/FrontMatch/'});
 });
 
 
