@@ -1,7 +1,6 @@
-export class Country
- {
+export class country{
     constructor(
-        public _id:     Number,
+        public _id:     String,
         public name:    String,
         public capital: String,
         public code:    String,

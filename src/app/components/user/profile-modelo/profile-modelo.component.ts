@@ -6,7 +6,7 @@ import{ User} from '../../../models/user';
 import { FormGroup, FormBuilder, FormControl,Validators } from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
-import { Country}    from '../../../models/country';
+import { country}    from '../../../models/country';
 import { City   }    from '../../../models/city';
 import { GeoService} from  '../../../services/geo/geo.service';
 import { UploadService} from '../../../services/upload/upload.service';
@@ -29,7 +29,7 @@ export class ProfileModeloComponent  implements OnInit {
 
     public user: User;
     public userEdit: User;
-    public country: Country[];
+    public country: country[];
     public city   : City[];
     //public tiles: Tile[];
     public  Form: FormGroup;
