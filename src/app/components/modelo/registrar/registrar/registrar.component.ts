@@ -1,8 +1,8 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl,Validators } from '@angular/forms';
 import { User} from '../../../../models/user';
-import { Country} from '../../../../models/country';
-import { City} from '../../../../models/City';
+import {Country} from '../../../../models/country';
+import { City} from '../../../../models/city';
 import * as moment from 'moment';
 import '../../../../services/calendar/moment.es';
 import * as alertify from 'alertifyjs';

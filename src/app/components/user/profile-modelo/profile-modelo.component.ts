@@ -7,7 +7,7 @@ import { FormGroup, FormBuilder, FormControl,Validators } from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 import { Country}    from '../../../models/country';
-import { City   }    from '../../../models/City';
+import { City   }    from '../../../models/city';
 import { GeoService} from  '../../../services/geo/geo.service';
 import { UploadService} from '../../../services/upload/upload.service';
 import { GLOBAL}     from '../../../services/global';

@@ -1,8 +1,10 @@
-export  interface Country
- {
-    _id:     number;
-    name:   string;
-    capital:string;
-    code:   string;
-    estado: number;
- }
+ export class Country{
+    constructor(
+        public _id          :   Number,
+        public name         :   String,
+        public capital      :   String,
+        public code         :   String,
+        public estado       :   Number,
+        ) {}
+}
+
