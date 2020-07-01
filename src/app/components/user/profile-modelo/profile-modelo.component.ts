@@ -4,8 +4,8 @@ import {UserModeloService} from '../../../services/user-modelo/user-modelo.servi
 import{ User} from '../../../models/user';
 import { FormGroup, FormBuilder, FormControl,Validators } from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { Country}    from '../../../models/country';
-import { City   }    from '../../../models/city';
+import { Country}    from './country';
+import { City   }    from './city';
 import { GeoService} from  '../../../services/geo/geo.service';
 import { UploadService} from '../../../services/upload/upload.service';
 import { GLOBAL}     from '../../../services/global';
