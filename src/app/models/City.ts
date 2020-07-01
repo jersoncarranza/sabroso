@@ -1,4 +1,3 @@
-
 export  interface City
 {
    _id          :   number;
