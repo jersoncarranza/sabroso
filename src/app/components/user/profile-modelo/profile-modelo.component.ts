@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {UserService} from '../../../services/user/user.service';
 import {UserModeloService} from '../../../services/user-modelo/user-modelo.service';
-// import {Tile} from '../../../models/Tile';
 import{ User} from '../../../models/user';
 import { FormGroup, FormBuilder, FormControl,Validators } from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
-
 import { Country}    from '../../../models/country';
 import { City   }    from '../../../models/city';
 import { GeoService} from  '../../../services/geo/geo.service';
