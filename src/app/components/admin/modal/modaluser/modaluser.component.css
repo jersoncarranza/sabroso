@@ -1,0 +1,16 @@
+.mat-form-field {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    width: 100%;
+}
+
+.mat-button-send{
+    width: 100%;
+    margin-bottom: -10px;
+}
+
+.center
+{
+  float: right;
+}

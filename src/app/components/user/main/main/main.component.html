@@ -1,16 +1,27 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <div class="container">
     <br>
+
+    <mat-form-field>
+        <mat-label>Busqueda</mat-label>
+        <input matInput #busqueda name="busqueda"   (keyup)="onKey($event)">
+    </mat-form-field>
     <div class="row">
 
-            <div *ngFor="let user of users;  index as i"  #user._id  [attr.id]="'card'+i" [attr.data-index]="'card'+i"
-                #materialcard  name="material-card" class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 material-card Blue-Grey">
+            <div *ngFor="let user of users| search:filtro_valor;  index as i  "  #user._id  [attr.id]="'card'+i" [attr.data-index]="'card'+i"
+                #materialcard  name="material-card" class="col-lg-3 col-md-4 col-sm-6 col-6 material-card Blue-Grey">
                     <h2>
-                        <span> <p>
-                            {{user.nombres }},
-                            {{ConvertGenero(user.sexo)}}
--                            {{ ConvertAge(user.fechaNacimiento | amDateFormat: 'YYYY')}}
-                         </p> </span>
+                        <p>
+                            <span>
+                                {{user.nombres }}, {{ConvertGenero(user.sexo)}}
+                                <b *ngIf="user.fechaNacimiento">
+                                    {{ ConvertAge(user.fechaNacimiento | amDateFormat: 'YYYY')}}
+                                </b>
+                                <span *ngIf="user.city">
+                                    {{user.city}}
+                                </span>
+                            </span>
+                        </p>
                     </h2>
                     <div class="mc-content">
                         <div class="img-container">
@@ -30,8 +41,7 @@
                         <a href="https://wa.me/593{{user.whatsapp}}?text=Hola" > <mat-icon> call</mat-icon></a>
                         <!-- https://wa.me/5211234567890?text=Me%20interesa%20el%20auto%20que%20estás%20vendiendo -->
                     </div>
-                </div>
-
+              </div>
     </div>
 </div>
     <!--Paginacion-->

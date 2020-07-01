@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { User} from '../../../../models/user';
 import { Router, ActivatedRoute, Params} from '@angular/router';
@@ -6,17 +6,23 @@ import { UserService} from  '../../../../services/user/user.service';
 import * as alertify from 'alertifyjs';
 import * as moment   from 'moment';
 import '../../../../services/calendar/moment.es';
-
-
+import { UploadService} from '../../../../services/upload/upload.service';
+import {GLOBAL} from '../../../../services/global';
+import {ModalInfoComponent} from '../../modal-info/modal-info.component';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers:[UserService]
+  providers:[UserService, UploadService]
 })
 
 export class LoginComponent implements OnInit {
+    @ViewChild('imageprofile', {static: false}) DivImageProfile: ElementRef;
+    @ViewChild('card', {static: false}) DivCard: ElementRef;
+
     fechaActual = new Date();
+    public url: string;
     aio = this.fechaActual.getFullYear();
     mes = this.fechaActual.getMonth();
     day = this.fechaActual.getDay();
@@ -37,14 +43,24 @@ export class LoginComponent implements OnInit {
     public status: number;
     public message: string;
 
-    //barra
+     /***File***/
+     fileData    : File = null;
+     previewUrl  : any = null;
+     fileUploadProgress  : string = null;
+     uploadedFilePath    : string = null;
+     public urlFile      : string;
 
+    public loading: boolean;
     constructor(
         private formBuilder: FormBuilder,
         private formBuilderLogin: FormBuilder,
         private _userService: UserService,
         private _router: Router,
+        private _uploadService  :   UploadService,
+        public dialog               : MatDialog
+
     ) {
+        this.urlFile = GLOBAL.url;
         this.Form = new FormGroup({
             email:  new FormControl('', [Validators.required, Validators.email]),
             nombre: new FormControl(),
@@ -61,8 +77,9 @@ export class LoginComponent implements OnInit {
 
         });
 
-        this.user = new User("","","","","","","","","","",1,true, -1,7,-1,-1,0,0,"","","","","","","","");
+        this.user = new User("","","","","","","","","","",1,true, -1,7,-1,-1,0,0,"","","","","","","","","","");
         moment.locale('es');
+        this.loading = false;
 
     }
 
@@ -107,29 +124,67 @@ export class LoginComponent implements OnInit {
 
 
     Registrar(){
-        if(this.Form.value.nombre      != ''   &&
-			this.Form.value.email	   != ''   &&
-            this.Form.value.contrasena != ''   &&
-            this.Form.value.sexo   == 1 ||  this.Form.value.sexo   == 0){
+        if(
+            this.filesToUpload &&
+            this.Form.value.nombre.trim()     != ''   &&
+			this.Form.value.email.trim()	    != ''   &&
+            this.Form.value.contrasena.trim() != ''   &&
+                (this.Form.value.sexo   == 1 ||
+                this.Form.value.sexo   == 0 )
+            )
+            {
 
-            this.user.nombres   =  this.Form.value.nombre.trim();
-			this.user.email     =  this.Form.value.email.trim();
-            this.user.password  =  this.Form.value.contrasena.trim();
-            this.user.sexo     = this.Form.value.sexo;
+            this.loading = true;
+            this.DivCard.nativeElement.style.display  = 'none';
+           // this.Form.disabled = true;// .disabled = true;
+            this.user.nombres   =   this.Form.value.nombre.trim();
+			this.user.email     =   this.Form.value.email.trim();
+            this.user.password  =   this.Form.value.contrasena.trim();
+            this.user.sexo      =   this.Form.value.sexo;
+            this.user.estado    = 0;
+
 
 			this._userService.register(this.user).subscribe(
-		   	response => {
-                this.status =response.status;
+                response => {
+                    this.status =response.status;
+
 
                     if (this.status==1) {
                         this.message = 'Error en el servidor #2';
-                        localStorage.setItem('token', response.token);
-                        localStorage.setItem('identity', JSON.stringify( response.user));
+                        this._uploadService.makeFileRequestClientPay(
+                            this.urlFile + 'user/upload-pay-cloudinary/'+ response.user._id,
+                            [],
+                            this.filesToUpload,
+                                'image')
+                            .then((result:any)=>{
+                                //this.user.image = result.status;
+                                //console.log('rsult : '+result.status);
+
+                                if (result.status == 1) {
+                                    this.Form.reset();
+                                    this._router.navigate(['/login']);
+                                    alertify.alert('Correcto', 'Estimad@ '+result.user.nombres+' su pago será revisado y el usuario habilitado '+'<a>'+ result.user.email+'</a>');
+
+                                    this.filesToUpload = null;
+                                }else{
+                                    alertify.alert('error', 'Intente de nuevo');
+                                }
+                                this.loading = false;
+
+
+                            });
+
+
+                    }else{
+                        this.mensajeEstado(this.status);
+                        this.loading = false;
+                        this.DivCard.nativeElement.style.display  = 'block';
                     }
-                    this.mensajeEstado(this.status);
 
 		 		}
-		 	);
+             );
+
+
 		}else{
 			alertify.alert('Complete', 'Ingrese todos los datos');
 		}
@@ -165,9 +220,7 @@ export class LoginComponent implements OnInit {
 			case 0:
                 alertify.alert('Error', 'Error intentalo mas tarde');
             break;
-			case 1:
-                this._router.navigate(['/home']);
-                alertify.success('Correcto', 'Registro correctamente'); break;
+			//case 1:this.Form.reset();this._router.navigate(['/login']); alertify.success('Correcto', 'Registro correctamente'); break;
             case 2: alertify.alert('Advertencia', 'La clave esta mal'); break;//login
 
             case 4: alertify.alert('Error', 'No se ha podido actualizar el estado del pago'); break;
@@ -188,10 +241,7 @@ export class LoginComponent implements OnInit {
 			case 1:     this._router.navigate(['/home']);         break;
             case 2: alertify.alert('Advertencia', 'La clave esta mal'); break;//login
             case 3: alertify.alert('Advertencia', 'El usuario esta desactivado'); break;//login
-
-
             case 4: alertify.alert('Error', 'No se ha podido actualizar el estado del pago'); break;
-
 			case 7: alertify.alert('Advertencia', 'No se que hacer'); break;
 			case 8: alertify.alert('Advertencia', 'Este correo no existe'); break;//login
 			case 9: alertify.alert('Error', 'Este correo ya esta registrado'); break;
@@ -200,6 +250,46 @@ export class LoginComponent implements OnInit {
 		}
     }
 
+
+       //******Archivos - Files*****/
+       public filesToUpload: Array<File>;
+       fileChangeEvent(fileInput: any) {
+           this.filesToUpload = <Array<File>>fileInput.target.files;
+           this.fileData = <File>fileInput.target.files[0];
+           this.preview();
+       }
+
+       preview() {
+           // Show preview
+           this.DivImageProfile.nativeElement.style.display  = 'none';
+           var  mimeType = this.fileData.type;
+           if (mimeType.match(/image\/*/) == null) {
+             return;
+           }
+           var reader = new FileReader();
+
+           reader.readAsDataURL(this.fileData);
+           reader.onload = (_event) => {
+             this.previewUrl = reader.result;
+           }
+       }
+
+       /************************ */
+
+
+    clickOpenDialogInfo():void {
+        console.log('li');
+        const dialogRef =   this.dialog.open(ModalInfoComponent, {
+            width: '500px',
+            //data:user
+          });
+
+          dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+           // this.animal = result;
+          });
+
+      }
 
 
 }

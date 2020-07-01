@@ -35,12 +35,12 @@
                     <span class="mdc-list-item__text">Perfil Modelo</span>
               </a>
 
-              <!--
-              <a  class="mdc-list-item" href="#" *ngIf="user.tipo == 7" >
-                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">   person</i>
-                    <span class="mdc-list-item__text">Perfil</span>
+
+              <a  *ngIf="user.tipo == 1" class="mdc-list-item" [routerLink]="['/home/admin']">
+                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">person</i>
+                    <span class="mdc-list-item__text">Admin</span>
               </a>
-            -->
+
 
 
                 <a class="mdc-list-item"   (click)="logout()">

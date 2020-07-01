@@ -11,6 +11,7 @@ import { City   }    from '../../../models/City';
 import { GeoService} from  '../../../services/geo/geo.service';
 import { UploadService} from '../../../services/upload/upload.service';
 import { GLOBAL}     from '../../../services/global';
+import * as alertify from 'alertifyjs';
 @Component({
   selector: 'app-profile-modelo',
   templateUrl: './profile-modelo.component.html',
@@ -22,15 +23,12 @@ export class ProfileModeloComponent  implements OnInit {
     /***Red social**/
     @ViewChild('redsocial', {static: false}) InputRedSocial: ElementRef;
     @ViewChild('whatsapp', {static: false})  InputWhatsapp: ElementRef;
-
     @ViewChild('imageprofile', {static: false}) DivImageProfile: ElementRef;
     public identity;
     public token;
 
     public user: User;
     public userEdit: User;
-
-
     public country: Country[];
     public city   : City[];
     //public tiles: Tile[];
@@ -59,7 +57,7 @@ export class ProfileModeloComponent  implements OnInit {
             nombre_form:         new FormControl(),
             descripcion_form:    new FormControl(),
         });
-        this.userEdit = new User("","","","","","","","","","",1,true, -1,8,-1,-1,0,0,"","","","","","","","");
+        this.userEdit = new User("","","","","","","","","","",1,true, -1,8,-1,-1,0,0,"","","","","","","","","","");
         this.urlFile = GLOBAL.url;
         this.urlImage = GLOBAL.urlcloudinary;
 
@@ -78,14 +76,18 @@ export class ProfileModeloComponent  implements OnInit {
                 if(!response.user){
                     console.log('no hay datos');
                 }else{
+                  //  console.log('no hay datos');
+
+                    //console.log(response);
                     this.user = response.user;
                     console.log('ok: '+this.user);
-                    this.Form.controls['nombre_form'].setValue(this.user.nombres);
-                    this.Form.controls['descripcion_form'].setValue(this.user.descripcion);
+                   this.Form.controls['nombre_form'].setValue(this.user.nombres);
+                   this.Form.controls['descripcion_form'].setValue(this.user.descripcion);
                 }
 
             }
         )
+
     }
 
 
@@ -121,17 +123,6 @@ export class ProfileModeloComponent  implements OnInit {
                     if (response.status == 1) {
                         this._snackBar.open('Corectamente Modificado', 'Ok',{ duration: 1000});
 
-                        console.log('this.filesToUpload' + this.filesToUpload);
-                        //Subida de imagen de usuario
-
-                        if(this.filesToUpload && this.filesToUpload.length){
-
-                            this._uploadService.makeFileRequestModeloRegister(this.urlFile + 'user/upload-user-cloudinary/'+ this.user._id, [], this.filesToUpload, 'image')
-                            .then((result:any)=>{
-                                this.user.image = result.user.image;
-                            });
-
-                        }
 
 
                     }else{
@@ -142,6 +133,26 @@ export class ProfileModeloComponent  implements OnInit {
 
         }else{
 
+        }
+        this.cambiarFoto();
+
+    }
+
+    cambiarFoto(){
+        console.log('comprovando');
+        if(this.filesToUpload){
+
+            this._uploadService.makeFileRequestModeloRegister(
+                this.urlFile + 'user/upload-user-cloudinary/'+ this.user._id,
+                [],
+                this.filesToUpload,
+                'image')
+            .then((result:any)=>{
+                this.user.image = result.user.image;
+                this.filesToUpload = null;
+                console.log('listo');
+
+            });
         }
 
     }

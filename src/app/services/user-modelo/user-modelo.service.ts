@@ -33,6 +33,7 @@ export class UserModeloService {
     ////////////////
     getUserModelo(UserId: String): Observable<any>{
         this.getToken();
+        console.log('UserId'+UserId);
         let headers = new HttpHeaders().set('Content-Type','application/json')
                                        .set('Authorization', this.token);
         return this._http.get(this.url+'user/get-user/' + UserId, {headers:headers});

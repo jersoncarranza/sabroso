@@ -9,20 +9,27 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material';
 
-
-
 import { LoginComponent } from './components/user/login/login/login.component';
-//import { HeaderComponent } from './components/user/header/header/header.component';
 import  './services/calendar/moment.es';
-//import { HomeComponent } from './components/user/home/home.component';
 
 import {UserGuard} from './services/guard/user.guard';
 import { RegistrarComponent } from './components/modelo/registrar/registrar/registrar.component';
-import {HomeModule } from './home/home.module';
+import { HomeModule } from './home/home.module';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule} from '@angular/material/datepicker';
 import { MainComponent } from './components/user/main/main/main.component';
 import { MainHijoComponent } from './components/user/main-hijo/main-hijo/main-hijo.component';
+import { MainadminComponent } from './components/admin/mainadmin/mainadmin.component';
+import { UsuarioComponent } from './components/admin/usuario/usuario/usuario.component';
+import { ModeloComponent } from './components/admin/modelo/modelo/modelo.component';
+import { ModaluserComponent } from './components/admin/modal/modaluser/modaluser.component';
+import { ModalmodeloComponent } from './components/admin/modalmodelo/modalmodelo/modalmodelo.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ModalInfoComponent } from './components/user/modal-info/modal-info.component';
+import { SearchPipe } from './pipes/search.pipe';
+import { FileUploadModule } from 'ng2-file-upload';
+import { UploadComponent } from './components/test/upload/upload/upload.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +37,15 @@ import { MainHijoComponent } from './components/user/main-hijo/main-hijo/main-hi
      RegistrarComponent,
      MainComponent,
      MainHijoComponent,
+     MainadminComponent,
+     UsuarioComponent,
+     ModeloComponent,
+     ModaluserComponent,
+     ModalmodeloComponent,
+     NotFoundComponent,
+     ModalInfoComponent,
+     SearchPipe,
+     UploadComponent,
      //HeaderComponent,
     // HomeComponent,
   ],
@@ -44,7 +60,8 @@ import { MainHijoComponent } from './components/user/main-hijo/main-hijo/main-hi
         MomentModule,
         HomeModule,
         MatNativeDateModule,
-        MatDatepickerModule
+        MatDatepickerModule,
+        FileUploadModule
   ],
 
   providers: [

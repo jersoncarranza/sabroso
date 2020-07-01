@@ -16,6 +16,12 @@ import {UserGuard} from '../services/guard/user.guard';
 import { FormsModule} from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { ModaluserComponent } from '../components/admin/modal/modaluser/modaluser.component';
+import { ModalmodeloComponent } from '../components/admin/modalmodelo/modalmodelo/modalmodelo.component';
+import {ModalInfoComponent} from '../components/user/modal-info/modal-info.component';
+
+
+
 @NgModule({
     declarations:[
         HomeComponent,
@@ -35,13 +41,16 @@ import { ReactiveFormsModule } from '@angular/forms';
     exports:[
         HomeComponent,//MainComponent,
         ProfileModeloComponent
-
     ],
     providers:[
          UserService,
          UserGuard
     ],
-
+    entryComponents:[
+        ModaluserComponent,
+        ModalmodeloComponent,
+        ModalInfoComponent
+    ]
     //bootstrap: [AppComponent]
 })
 

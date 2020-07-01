@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<div mat-dialog-content>
+    <h1 mat-dialog-title> {{data.nombres}}</h1>
+
+    <mat-grid-list cols="4" rowHeight="6:1">
+        <mat-grid-tile>Estado:</mat-grid-tile>
+        <mat-grid-tile></mat-grid-tile>
+        <mat-grid-tile>
+            <mat-slide-toggle
+            [(ngModel)]="checked"
+            class="example-margin"
+            [color]="color"
+            (change)="onChange($event)">
+
+            </mat-slide-toggle>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <span >{{checked  ? ' Activado' : 'Desactivado'}}</span>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <br>
+    <mat-grid-list   cols="1" rowHeight="6:1">
+        <img    height="400px"  src="{{urlImage + data.imagepay}}">
+    </mat-grid-list>
+    <mat-form-field class="example-full-width"  appearance="fill">
+        <mat-label>Enviar Mail</mat-label>
+        <textarea matInput #mensaje></textarea>
+        <button mat-raised-button color="primary" (click)="sendMail()" class="mat-button-send">Enviar</button>
+    </mat-form-field>
+
+</div>
+<mat-grid-list   cols="1" rowHeight="6:1">
+    <div class="center">
+        <button mat-button (click)="onNoClick()">Cerrar</button>
+    </div>
+</mat-grid-list>

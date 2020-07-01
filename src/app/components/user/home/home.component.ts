@@ -13,7 +13,6 @@ import{ User} from '../../../models/user';
 export class HomeComponent implements OnInit {
 
     public user: User;
-
     public identity;
     public topAppBar: MDCTopAppBar;
     public drawer: MDCDrawer;

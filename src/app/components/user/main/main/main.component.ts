@@ -1,15 +1,10 @@
-import { Component, OnInit,  ViewChild, ElementRef, Input, Directive, ViewChildren, QueryList, ViewContainerRef } from '@angular/core';
+import { Component, OnInit,  ViewChild, ElementRef, Input, Directive, ViewChildren, QueryList, ViewContainerRef, Output,EventEmitter  } from '@angular/core';
 import {UserService} from '../../../../services/user/user.service';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import{User} from '../../../../models/user';
 import{GLOBAL} from '../../../../services/global';
-
-
-
-@Directive({selector: 'pane-card'})
-    export class Pane {
-        selector:['id-card']
-    }
+import { FormControl, FormGroup } from '@angular/forms';
+//import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-main',
@@ -18,20 +13,8 @@ import{GLOBAL} from '../../../../services/global';
   providers:[UserService]
 })
 export class MainComponent implements  OnInit {
-
-  //  @ViewChildren("i") idarticle: QueryList<any>;
-
-    @ViewChild('i', { read: ElementRef }) idarticle:ElementRef;
-    @Input() MaterialCardRef: ElementRef;
-    @Input() IconRef: ElementRef;
-
-    @ViewChild('materialcard', { read: ElementRef }) MaterialCard:ElementRef;
-    @ViewChild('icon', {static: true}) Icon: ElementRef;
-
-   // public hoy = moment(new Date);
     public DateActual = new Date();
     public anioActual;
-    //public DateActual: this.DateActual2.getYear();//  Date = new Date();
 
     public page: number;
     public prev_enable: Boolean;
@@ -44,12 +27,12 @@ export class MainComponent implements  OnInit {
     public users: User[];
     public status: string;
     public userPageId:string;
-
+    public  Form: FormGroup;
 
     public urlImage: string;
+    @ViewChild('busqueda', {static: false}) DivCard: ElementRef;
 
-
-
+    public filtro_valor:string;
   	constructor(
         private _route: ActivatedRoute,
         private _router: Router,
@@ -57,27 +40,35 @@ export class MainComponent implements  OnInit {
       ) {
         this.urlImage = GLOBAL.urlcloudinary;
         this.anioActual = this.DateActual.getFullYear();
+        // this.Form = new FormGroup({
+        //   search : new FormControl('')
+        // });
+      //  this.search= new FormControl('');
       }
 
+   //@Output('search') searchEmmiter = new EventEmitter<string>();
 
   	ngOnInit(): void {
-
+       // this.search.valueChanges.subscribe(value=> this.searchEmmiter.emit(value));
         this.actualPage();
         this.prev_enable = false;
 	}
-
-	getUsers(page){
-        this._userService.getUsers(page).subscribe(
+	getModelos(page){
+        this._userService.getModelos(page).subscribe(
             response =>{
                 if(!response.users){
                     this.status = 'error'
                 }else{
-                    this.total = response.total;
-                    this.users = response.users;
-                    this.pages = response.pages;
+                    this.total = response.users[0]['total'][0]['total'];
+                    this.users =response.users[0]['users'];
+                    console.log(' this.users'+ response.users[0]['total'][0]['total']);
+                    //console.log(' status'+ response.status);
+
+                    this.pages = response.users[0]['total'][0]['pages'];
+                    this.pages =     Math.ceil(this.total/this.pages);
                   //  this.pagination = this.pages.fill().map((x,i)=>i); // [0,1,2,3,4]
                     if(page > this.pages){
-                        this._router.navigate(['/principal', 1]);
+                        this._router.navigate(['/usuarios', 1]);
                     }
                 }
             },
@@ -105,7 +96,7 @@ export class MainComponent implements  OnInit {
                 this.prev_page=1;
             }
         }
-        this.getUsers(page);
+        this.getModelos(page);
 
         })
     }
@@ -151,6 +142,10 @@ export class MainComponent implements  OnInit {
 
     arrayOne(n: number): any[] {
         return Array(n);
+    }
+
+    onKey(event: any) { // without type info
+        this.filtro_valor=event.target.value;
     }
 
 }

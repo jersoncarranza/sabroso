@@ -14,105 +14,118 @@
     </ng-template>
 </mat-expansion-panel>
 <br>
-<div class="center-padre">
-<mat-card class="example-card">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Inscribirse</mat-card-title>
-      <mat-card-subtitle>LLenar datos</mat-card-subtitle>
-    </mat-card-header>
+<div *ngIf="loading" class="center-padre">
+    <mat-spinner class="center-snipper" *ngIf="loading"></mat-spinner>
+</div>
+<div   #card >
+    <div class="center-padre">
+        <mat-card  class="example-card">
+            <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>Inscribirse</mat-card-title>
+            <mat-card-subtitle>LLenar datos</mat-card-subtitle>
+            </mat-card-header>
+            <div  class="example-container">
 
-    <div class="example-container">
+                <form [formGroup]="Form" (ngSubmit)="DatosUsuario()">
 
-        <form [formGroup]="Form" (ngSubmit)="DatosUsuario()">
-
-            <mat-form-field >
-                <mat-label>Ingresa tu nombre</mat-label>
-                <input matInput placeholder="Nombres" name="nombre" formControlName="nombre" >
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-                <input matInput placeholder="Ingresa tu email" name="email" formControlName="email"  required>
-                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-                <input matInput placeholder="Contraseña " name="contrasena" formControlName="contrasena" >
-                <!-- <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"> -->
-                <!-- <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->
-                <!-- </button> -->
-            </mat-form-field>
-            <br>
-            <mat-form-field class="example-full-width">
-                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Fecha Nacimiento" name="calendar"
-                formControlName="calendar" >
-
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-            <br>
-            <mat-radio-group aria-label="Seleccione"  formControlName="sexo" name="sexo" >
-                <mat-radio-button value="1">Hombre</mat-radio-button>
-                <mat-radio-button value="0">Mujer</mat-radio-button>
-            </mat-radio-group>
-            <br>
-            <mat-list-item>
-                <mat-form-field >
-                    <mat-label>País</mat-label>
-                    <mat-select formControlName="country">
-                        <mat-option (onSelectionChange)="onChange($event)"  *ngFor="let dataCountry of country" [value]="dataCountry._id">
-                        {{dataCountry.name}}   {{dataCountry.code}}
-                        </mat-option>
-                    </mat-select>
+                    <mat-form-field >
+                        <mat-label>Ingresa tu nombre</mat-label>
+                        <input matInput placeholder="Nombres" name="nombre" formControlName="nombre" >
                     </mat-form-field>
-            </mat-list-item>
-
-            <mat-list-item>
-                <mat-form-field >
-                    <mat-label>Ciudad</mat-label>
-                    <mat-select formControlName="city">
-                        <mat-option   *ngFor="let dataCity of city" [value]="dataCity._id">
-                        {{dataCity.name}}
-                        </mat-option>
-                    </mat-select>
+                    <br>
+                    <mat-form-field>
+                        <input matInput placeholder="Ingresa tu email" name="email" formControlName="email"  required>
+                        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
                     </mat-form-field>
-            </mat-list-item>
+                    <br>
+                    <mat-form-field>
+                        <!-- <mat-form-field>
+                            <input matInput placeholder="Contraseña " [type]="hide ? 'password' : 'text'" name="contrasena" formControlName="contrasena" >
+                            <label mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </label>
+                            </mat-form-field> -->
+                        <input matInput placeholder="Contraseña" [type]="hide ? 'password' : 'text'" name="contrasena" formControlName="contrasena" >
+                        <label mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </label>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="example-full-width">
+                        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Fecha Nacimiento" name="calendar"
+                        formControlName="calendar" >
 
-            <mat-list-item>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <br>
+                    <mat-radio-group aria-label="Seleccione"  formControlName="sexo" name="sexo" >
+                        <mat-radio-button value="1">Hombre</mat-radio-button>
+                        <mat-radio-button value="0">Mujer</mat-radio-button>
+                    </mat-radio-group>
+                    <br>
+                    <mat-list-item>
+                        <mat-form-field >
+                            <mat-label>País</mat-label>
+                            <mat-select formControlName="country">
+                                <mat-option (onSelectionChange)="onChange($event)"  *ngFor="let dataCountry of country" [value]="dataCountry._id">
+                                {{dataCountry.name}}   {{dataCountry.code}}
+                                </mat-option>
+                            </mat-select>
+                            </mat-form-field>
+                    </mat-list-item>
 
-                <label for="image"  class="btn btn-outline-light">
-                    <span> Documento de identidad
-                        <i class="fa fa-id-badge" aria-hidden="true"></i>
-                    </span>
-                </label>
+                    <mat-list-item>
+                        <mat-form-field >
+                            <mat-label>Ciudad</mat-label>
+                            <mat-select formControlName="city">
+                                <mat-option   *ngFor="let dataCity of city" [value]="dataCity._id">
+                                {{dataCity.name}}
+                                </mat-option>
+                            </mat-select>
+                            </mat-form-field>
+                    </mat-list-item>
 
-                <input id="image" type="file" name="image" (change)="fileChangeEvent($event)" />
+                    <mat-list-item>
 
-            </mat-list-item>
-            <mat-list-item>
-                <div *ngIf="fileUploadProgress">
-                Upload progress: {{ fileUploadProgress }}
-                </div>
-                <div   class="image-preview mb-3 btn-center" *ngIf="previewUrl">
-                    <img [src]="previewUrl" height="70" />
-                </div>
+                        <label for="image"  class="btn btn-outline-light">
+                            <span> Documento de identidad
+                                <i class="fa fa-id-badge" aria-hidden="true"></i>
+                            </span>
+                        </label>
 
-                <div  *ngIf="uploadedFilePath">
-                    {{uploadedFilePath}}
-                </div>
-            </mat-list-item>
-            <mat-list-item>
-                <br>
-                <div class="btn-center">
-                    <button mat-flat-button color="primary">Unirme
-                        <i class="material-icons mdc-button__icon" aria-hidden="true">favorite</i>
-                    </button>
-                </div>
-            </mat-list-item>
+                        <input id="image" type="file" name="image" (change)="fileChangeEvent($event)" />
 
-        </form>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <label for="image">
+
+                            <div *ngIf="fileUploadProgress">
+                                Upload progress: {{ fileUploadProgress }}
+                            </div>
+                            <div   class="image-preview mb-3 btn-center" *ngIf="previewUrl">
+                                <img [src]="previewUrl" height="70" />
+                            </div>
+
+                            <div  *ngIf="uploadedFilePath">
+                                {{uploadedFilePath}}
+                            </div>
+                        </label>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <br>
+                        <div class="btn-center">
+                            <button mat-flat-button color="primary">Unirme
+                                <i class="material-icons mdc-button__icon" aria-hidden="true">favorite</i>
+                            </button>
+                        </div>
+                    </mat-list-item>
+
+                </form>
+            </div>
+        </mat-card>
     </div>
-</mat-card>
 </div>
 
 

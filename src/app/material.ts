@@ -19,6 +19,10 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @NgModule({
 
     imports:[MatButtonModule,MatCardModule,
@@ -29,7 +33,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
         MatListModule,MatDatepickerModule,
         MatMomentDateModule, MatExpansionModule,
         MatStepperModule, MatGridListModule,MatSnackBarModule,
-        MatPaginatorModule],
+        MatPaginatorModule, MatDividerModule, MatSlideToggleModule,
+        MatDialogModule, MatProgressSpinnerModule],
 
     exports:[MatButtonModule, MatCardModule,
         MatToolbarModule,MatInputModule,
@@ -38,7 +43,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
         MatTabsModule,MatRadioModule,
         MatListModule,MatDatepickerModule,
         MatMomentDateModule, MatExpansionModule,
-        MatStepperModule, MatGridListModule,MatSnackBarModule
+        MatStepperModule, MatGridListModule,
+        MatSnackBarModule,MatDividerModule,MatSlideToggleModule,
+        MatDialogModule, MatProgressSpinnerModule
     ]
 })
 

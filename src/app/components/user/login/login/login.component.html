@@ -20,9 +20,9 @@
                             <mat-form-field>
                             <input matInput placeholder="Contraseña"  name="claveLogin" formControlName="claveLogin" [type]="hide ? 'password' : 'text'"
                             required >
-                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <label mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                            </button>
+                            </label>
                             </mat-form-field>
                         </mat-list-item>
 
@@ -31,8 +31,6 @@
                                 <button mat-flat-button color="primary">Entrar</button>
                             </div>
                         </mat-list-item>
-
-
                     </mat-list>
                 </form>
             </mat-tab>
@@ -42,9 +40,9 @@
                 <mat-icon class="example-tab-icon">person_add</mat-icon>
                 Registrarse
             </ng-template>
+            <mat-spinner class="center-snipper" *ngIf="loading"></mat-spinner>
 
-
-            <div class="example-container">
+            <div #card class="example-container">
                 <form [formGroup]="Form" (ngSubmit)="Registrar()">
                     <mat-list>
                         <mat-list-item>
@@ -62,14 +60,12 @@
 
                         <mat-list-item>
                                 <mat-form-field>
-                                <input matInput placeholder="contraseña " [type]="hide ? 'password' : 'text'" name="contrasena" formControlName="contrasena" >
-                                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <input matInput placeholder="Contraseña " [type]="hide ? 'password' : 'text'" name="contrasena" formControlName="contrasena" >
+                                <label mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                </button>
+                                </label>
                                 </mat-form-field>
                         </mat-list-item>
-
-                 
 
                         <mat-list-item>
                             <mat-radio-group aria-label="Seleccione"  formControlName="sexo" name="sexo" >
@@ -77,15 +73,48 @@
                                 <mat-radio-button value="0">Mujer</mat-radio-button>
                             </mat-radio-group>
                         </mat-list-item>
+                        <!-- image profile -->
+
+                        <mat-grid-list cols="3" rowHeight="4:1">
+                            <mat-grid-tile class="left">
+                                <label for="image"  class="btn btn-outline-light">
+                                    <div  #imageprofile name="imageprofile" for="image"  class="image-user">
+                                    </div>
+                                </label>
+                                <label for="image" class="upload-snipper" mat-stroked-button routerLink=".">Subir Pago</label>
+                                <input id="image" type="file"  class="custom-file-input" name="image" (change)="fileChangeEvent($event)" />
+                            </mat-grid-tile>
+                            <mat-grid-tile> </mat-grid-tile>
+                            <mat-grid-tile class="mat-grid-tile mat-figure">
+
+                                    <mat-icon (click)="clickOpenDialogInfo()" >info</mat-icon>
+
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <br/>
+
 
                         <mat-list-item>
+                            <label for="image">
+                                <div *ngIf="fileUploadProgress">
+                                Upload progress: {{ fileUploadProgress }}
+                                </div>
+                                <div   class="image-preview mb-3 btn-center" *ngIf="previewUrl">
+                                    <img [src]="previewUrl" height="70" />
+                                </div>
+
+                                <div  *ngIf="uploadedFilePath">
+                                    {{uploadedFilePath}}
+                                </div>
+                            </label>
+                        </mat-list-item>
+                        <!-- image profile -->
+                        <mat-list-item>
+                            <br>
                             <div class="btn-center">
-                                <button mat-flat-button color="primary">Unirme</button>
+                                <button mat-flat-button color="primary">Registrarme</button>
                             </div>
                         </mat-list-item>
-
-
-
                         </mat-list>
                     </form>
             </div>
@@ -101,9 +130,9 @@
 
 
 
-  <button mat-button [matMenuTriggerFor]="menu" class="bottom-bar" >Más</button>
+<button mat-button [matMenuTriggerFor]="menu" class="bottom-bar" >Más</button>
 <mat-menu #menu="matMenu">
-  <button mat-menu-item   >Nosotros</button>
-  <button mat-menu-item routerLink="/registrar-modelo" routerLinkActive="active" >Únete </button>
+    <button mat-menu-item routerLink="/registrar-modelo" >Únete </button>
+    <button mat-menu-item   >Nosotros</button>
 </mat-menu>
 

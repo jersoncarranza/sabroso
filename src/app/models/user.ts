@@ -25,6 +25,8 @@ export class User{
     public country:     String,
     public city:        String,
     public redSocial:   String,
-    public whatsapp:    String
+    public whatsapp:    String,
+    public imagepay:    String,
+    public dni:         String
     ) {}
 }

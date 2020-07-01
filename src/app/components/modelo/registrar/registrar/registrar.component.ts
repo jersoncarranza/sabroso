@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl,Validators } from '@angular/forms';
 import { User} from '../../../../models/user';
 import { Country} from '../../../../models/country';
@@ -19,7 +19,7 @@ import{GLOBAL} from '../../../../services/global';
   providers:[UserService, GeoService, UploadService]
 })
 export class RegistrarComponent implements OnInit {
-
+    @ViewChild('card', {static: false}) DivCard: ElementRef;
     fechaActual = new Date();
     aio = this.fechaActual.getFullYear();
     mes = this.fechaActual.getMonth();
@@ -28,6 +28,7 @@ export class RegistrarComponent implements OnInit {
     fecha2 = new Date();
     minDate = new Date(1950, 0, 1);
     maxDate = new Date(this.aio-18,  this.mes ,this.day);
+    public hide = true;
 
     public  Form: FormGroup;
     public  userRegisterModelo: User;
@@ -39,6 +40,7 @@ export class RegistrarComponent implements OnInit {
     public selectCountry : Country[] = [];
 
     public user: User;
+    public loading: boolean;
     /***File***/
 
     fileData: File = null;
@@ -54,6 +56,7 @@ export class RegistrarComponent implements OnInit {
         private _router: Router,
         private _uploadService: UploadService,
     ) {
+
         this.Form = new FormGroup({
             email:      new FormControl('', [Validators.required, Validators.email]),
             nombre:     new FormControl(),
@@ -63,13 +66,15 @@ export class RegistrarComponent implements OnInit {
             country:    new FormControl(),
             city:       new FormControl()
         });
-        this.userRegisterModelo = new User("","","","","","","","","","",1,true, -1,8,-1,-1,0,0,"","","","","","","","");
+        this.userRegisterModelo = new User("","","","","","","","","","",1,true, -1,8,-1,-1,0,0,"","","","","","","","","","");
         moment.locale('es');
         this.urlFile = GLOBAL.url;
+        this.loading = false;
 
     }
       //Registrar
-    email = new FormControl('', [Validators.required, Validators.email]);
+      email = new FormControl('', [Validators.required, Validators.email]);
+
     getErrorMessage() {
         return this.email.hasError('required') ? 'Ingrese mail' : this.email.hasError('email') ? 'Mail incorrecto' :'';
     }
@@ -80,7 +85,8 @@ export class RegistrarComponent implements OnInit {
     }
 
     DatosUsuario(){
-        if(this.Form.value.nombre      != ''   &&
+        if(this.filesToUpload &&
+            this.Form.value.nombre      != ''   &&
 			this.Form.value.email	   != ''   &&
             this.Form.value.contrasena != ''   &&
             this.Form.value.calendar   != null   &&
@@ -96,9 +102,12 @@ export class RegistrarComponent implements OnInit {
             this.userRegisterModelo.tipo    = 8; // 7 Cliente , 8 modelo
             this.userRegisterModelo.country = this.Form.value.country;
             this.userRegisterModelo.city    = this.Form.value.city;
+            this.loading = true;
 
+    
+            this.DivCard.nativeElement.style.display  = 'none',
 
-      		this._userService.register(this.userRegisterModelo).subscribe(
+      		this._userService.registerModelo(this.userRegisterModelo).subscribe(
 		   	response => {
                 this.status =response.status;
 
@@ -110,15 +119,19 @@ export class RegistrarComponent implements OnInit {
 
                         if(this.filesToUpload && this.filesToUpload.length){
                             //Subida de imagen de usuario
-                            this._uploadService.makeFileRequestModeloRegister(this.urlFile + 'user/upload-user-cloudinary/'+ this.user._id, [], this.filesToUpload, 'image')
+                            this._uploadService.makeFileRequestModeloRegister(this.urlFile + 'user/upload-model-dni/'+ this.user._id, [], this.filesToUpload, 'image')
                             .then((result:any)=>{
                                 this.user.image = result.user.image;
-                             //   localStorage.setItem('identity', JSON.stringify(this.user))
+                                localStorage.setItem('identity', JSON.stringify(this.user));
+                                this._router.navigate(['/home/perfil-modelo']);
+
                             });
                         }
+                        this.loading = false;
                     }
                     this.mensajeEstado(this.status);
-
+                    this.loading = false;
+                    this.DivCard.nativeElement.style.display  = 'block';
 		 		}
              );
 

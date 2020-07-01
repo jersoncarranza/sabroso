@@ -1,0 +1,34 @@
+<div mat-dialog-content>
+    <h1 mat-dialog-title> {{data.nombres}}</h1>
+    <mat-grid-list cols="3" rowHeight="4:1">
+        <mat-grid-tile>Estado:</mat-grid-tile>
+
+        <mat-grid-tile>
+            <mat-slide-toggle
+            [(ngModel)]="checked"
+            class="example-margin"
+            [color]="color"
+            (change)="onChange($event)">
+
+            </mat-slide-toggle>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <span >{{checked  ? ' Activado' : 'Desactivado'}}</span>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <mat-grid-list   cols="1" rowHeight="6:1">
+        <img    height="400px"  src="{{urlImage + data.dni}}">
+    </mat-grid-list>
+    <mat-grid-list cols="2" rowHeight="4:1">
+        <mat-grid-tile>Correo:</mat-grid-tile>
+        <mat-grid-tile>{{data.email}}</mat-grid-tile>
+    </mat-grid-list>
+
+
+</div>
+<mat-grid-list   cols="1" rowHeight="6:1">
+    <div class="center">
+        <button mat-button (click)="onClose()">Cerrar</button>
+    </div>
+</mat-grid-list>
+
