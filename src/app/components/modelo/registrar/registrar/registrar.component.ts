@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl,Validators } from '@angular/forms';
 import { User} from '../../../../models/user';
-import {country} from '../../../../models/country';
+import {Country} from '../../../../models/country';
 import { City} from '../../../../models/city';
 import * as moment from 'moment';
 import '../../../../services/calendar/moment.es';
@@ -32,12 +32,12 @@ export class RegistrarComponent implements OnInit {
 
     public  Form: FormGroup;
     public  userRegisterModelo: User;
-    public country: country[];
+    public country: Country[];
     public city: City[];
 
     public status: number;
     public message: string;
-    public selectCountry : country[] = [];
+    public selectCountry : Country[] = [];
 
     public user: User;
     public loading: boolean;
