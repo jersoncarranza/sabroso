@@ -5,7 +5,10 @@ const app = express();
 var server_host = process.env.YOUR_HOST || '0.0.0.0';
 var PORT        =  process.env.PORT || 3000;
 
-app.use(express.static(__dirname + '/dist/FrontMatch'));
+app.use(express.static(__dirname + '/dist/'));
+app.get('/*', function(req,res){
+    res.sendFile(path.join(__dirname + '/dist/index.html'));
+});
 
 app.listen(PORT,server_host, function(){
     console.log('server start');
