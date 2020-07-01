@@ -1,8 +1,10 @@
-export  interface City
+export class City
 {
-   _id          :   number;
-   name         :   string;
-   estado       :   Number;
-   idCountry    :   String;
-   population   :   String;
+    constructor(
+        public _id          :   number,
+        public name         :   string,
+        public estado       :   Number,
+        public idCountry    :   String,
+        public population   :   String,
+        ){}
 }
