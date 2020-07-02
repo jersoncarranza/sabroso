@@ -30,6 +30,7 @@
     "@material/drawer": "^5.1.0",
     "@material/tab-bar": "^5.1.0",
     "@material/top-app-bar": "^5.1.0",
+    "@nguniversal/express-engine": "^10.0.1",
     "@types/jquery": "^3.3.38",
     "alertifyjs": "^1.13.1",
     "angular2-moment": "^1.9.0",
